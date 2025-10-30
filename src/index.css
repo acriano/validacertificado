@@ -1,0 +1,111 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Glow gradient border using ::before */
+.card-glow {
+  --border-radius: 24px; /* alinhado ao rounded-3xl */
+}
+
+.card-glow::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(45deg, #ff595e, #ffca3a, #8ac926, #1982c4, #6a4c93, #ff6700);
+  filter: blur(10px);
+  background-size: 400%;
+  z-index: 0;
+  animation: glow 20s linear infinite;
+  width: 100%;
+  border-radius: var(--border-radius);
+}
+
+/* Soft glow shadow for smoother borders */
+.card-glow::after {
+  content: "";
+  position: absolute;
+  top: -8px;
+  left: -8px;
+  right: -8px;
+  bottom: -8px;
+  background: linear-gradient(45deg, #ff595e, #ffca3a, #8ac926, #1982c4, #6a4c93, #ff6700);
+  background-size: 400%;
+  filter: blur(50px);
+  opacity: 0.35;
+  z-index: -1;
+  border-radius: calc(var(--border-radius) + 8px);
+}
+ 
+@keyframes glow {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* Definition of the design system. All colors, gradients, fonts, etc should be defined here. 
+All colors MUST be HSL.
+*/
+
+@layer base {
+  :root {
+    --background: 0 0% 97%;
+    --foreground: 0 0% 15%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 0 0% 15%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 0 0% 15%;
+
+    /* #122945 in HSL */
+    --primary: 213 59% 17%;
+    --primary-foreground: 0 0% 100%;
+
+    --secondary: 210 100% 96%;
+    --secondary-foreground: 210 45% 25%;
+
+    --muted: 210 40% 96.1%;
+    --muted-foreground: 215.4 16.3% 46.9%;
+
+    --accent: 14 100% 65%;
+    --accent-foreground: 0 0% 100%;
+
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 0 0% 100%;
+
+    --border: 220 15% 90%;
+    --input: 220 15% 90%;
+    --ring: 210 45% 25%;
+
+    --radius: 0.5rem;
+
+    --gradient-bg: linear-gradient(135deg, hsl(45 50% 95%) 0%, hsl(140 30% 95%) 100%);
+    --certificate-border: linear-gradient(90deg, hsl(45 80% 75%), hsl(140 50% 75%));
+    --bs-heading-color: hsl(var(--foreground));
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+    font-family: "Segoe UI", -apple-system, BlinkMacSystemFont, "Helvetica Neue", Arial, "Noto Sans", "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", sans-serif;
+  }
+}
+
+/* Utilitário para personalização de textos/títulos */
+
+.text-personalizado {
+  font-size: 1.75rem;
+  margin-top: 0;
+  margin-bottom: 2rem;
+  font-weight: 500;
+  line-height: 1.2;
+  color: var(--bs-heading-color);
+}
